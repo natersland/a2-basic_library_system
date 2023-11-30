@@ -1,17 +1,17 @@
 package features;
 
 import common.StringValue;
-import data.Book;
+import data.BookEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Library {
-    private final List<Book> books;
+    private final List<BookEntity> bookEntities;
 
     public Library() {
-        this.books = new ArrayList<>();
+        this.bookEntities = new ArrayList<>();
     }
 
     private void welcomeMessage() {
@@ -59,17 +59,17 @@ public class Library {
 
 
     private void showBooks() {
-        if (books.isEmpty()) {
+        if (bookEntities.isEmpty()) {
             System.out.println(StringValue.NOT_HAVE_BOOK);
         } else {
             System.out.println(StringValue.BOOK_LIST);
-            for (int i = 0; i < books.size(); i++) {
-                Book book = books.get(i);
+            for (int i = 0; i < bookEntities.size(); i++) {
+                BookEntity bookEntity = bookEntities.get(i);
                 String index = String.valueOf(i + 1);
-                String title = book.getTitle();
+                String title = bookEntity.getTitle();
                 String capitalizedTitle = title.substring(0, 1).toUpperCase() + title.substring(1);
-                String author = book.getAuthor();
-                int quantity = book.getQuantity();
+                String author = bookEntity.getAuthor();
+                int quantity = bookEntity.getQuantity();
                 System.out.println(index + ": " + capitalizedTitle + ", " + author + ", " + quantity + " " + bookText(quantity));
             }
             System.out.println("++++++++++++++++++++++++++++++");
@@ -80,8 +80,8 @@ public class Library {
 
 
     private boolean isExistBook(String title, String author) {
-        for (Book book : books) {
-            if (book.getTitle().equals(title) && book.getAuthor().equals(author)) {
+        for (BookEntity bookEntity : bookEntities) {
+            if (bookEntity.getTitle().equals(title) && bookEntity.getAuthor().equals(author)) {
                 return true;
             }
         }
@@ -89,9 +89,9 @@ public class Library {
     }
 
     private void addQuantityToExistBook(String title, int quantity) {
-        for (Book book : books) {
-            if (book.getTitle().equals(title)) {
-                book.setQuantity(book.getQuantity() + quantity);
+        for (BookEntity bookEntity : bookEntities) {
+            if (bookEntity.getTitle().equals(title)) {
+                bookEntity.setQuantity(bookEntity.getQuantity() + quantity);
             }
         }
     }
@@ -139,8 +139,8 @@ public class Library {
             addQuantityToExistBook(title, quantity);
         } else {
             System.out.println(StringValue.BOOK_NOT_EXIST + addToTheLibraryText);
-            Book book = new Book(title, author, quantity);
-            books.add(book);
+            BookEntity bookEntity = new BookEntity(title, author, quantity);
+            bookEntities.add(bookEntity);
         }
 
         showMenu();
@@ -148,7 +148,7 @@ public class Library {
     }
 
 
-    private void handleBookAction(String actionPrompt, String successMessage, boolean borrow) {
+    private void handleBookAction(String successMessage, boolean borrow) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(StringValue.ENTER_BOOK_TITLE);
         String title = scanner.nextLine().toLowerCase();
@@ -157,12 +157,12 @@ public class Library {
 
         boolean bookFound = false;
 
-        for (Book book : books) {
-            if (book.getTitle().equals(title)) {
+        for (BookEntity bookEntity : bookEntities) {
+            if (bookEntity.getTitle().equals(title)) {
                 bookFound = true;
-                if (!borrow || book.getQuantity() >= quantity) {
-                    int newQuantity = borrow ? (book.getQuantity() - quantity) : (book.getQuantity() + quantity);
-                    book.setQuantity(newQuantity);
+                if (!borrow || bookEntity.getQuantity() >= quantity) {
+                    int newQuantity = borrow ? (bookEntity.getQuantity() - quantity) : (bookEntity.getQuantity() + quantity);
+                    bookEntity.setQuantity(newQuantity);
                     System.out.println(successMessage + " " + title + " " + quantity + " " + bookText(quantity));
                 } else {
                     System.out.println(StringValue.NOT_ENOUGH_BOOK);
@@ -179,11 +179,11 @@ public class Library {
     }
 
     public void borrowBook() {
-        handleBookAction(StringValue.ENTER_BOOK_QUANTITY, StringValue.YOU_BORROWED, true);
+        handleBookAction(StringValue.YOU_BORROWED, true);
     }
 
     public void returnBook() {
-        handleBookAction(StringValue.ENTER_BOOK_QUANTITY, StringValue.SUCCESSFUL_RETURN, false);
+        handleBookAction(StringValue.SUCCESSFUL_RETURN, false);
     }
 
 }
