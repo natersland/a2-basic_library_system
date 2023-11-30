@@ -37,7 +37,7 @@ public class Library {
                 choice = scanner.nextInt();
                 break;
             } catch (java.util.InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a valid integer.");
+                System.out.println(StringValue.PLEASE_ENTER_VALID_INTEGER);
                 scanner.nextLine();
             }
         }
@@ -48,7 +48,7 @@ public class Library {
             case 3 -> borrowBook();
             case 4 -> returnBook();
             case 5 -> {
-                System.out.println("Exiting the program. Goodbye!");
+                System.out.println(StringValue.EXIT_PROGRAM);
                 System.exit(0);
             }
             default -> System.out.println(StringValue.WRONG_INPUT);
@@ -104,7 +104,7 @@ public class Library {
         }
     }
 
-    private int getQuantityFromUser(Scanner scanner, String enterBookQuantity) {
+    private int getQuantityFromUser(Scanner scanner) {
         int quantity = 0;
         boolean validInput = false;
 
@@ -130,7 +130,7 @@ public class Library {
         System.out.println(StringValue.ENTER_BOOK_AUTHOR);
         String author = scanner.nextLine();
 
-        int quantity = getQuantityFromUser(scanner, StringValue.ENTER_BOOK_QUANTITY);
+        int quantity = getQuantityFromUser(scanner);
 
         String addToTheLibraryText = "\n" + StringValue.ADDED + " " + title + " " + quantity + " " + bookText(quantity) + " " + StringValue.TO_THE_LIBRARY;
 
@@ -153,7 +153,7 @@ public class Library {
         System.out.println(StringValue.ENTER_BOOK_TITLE);
         String title = scanner.nextLine().toLowerCase();
 
-        int quantity = getQuantityFromUser(scanner, StringValue.ENTER_BOOK_QUANTITY);
+        int quantity = getQuantityFromUser(scanner);
 
         boolean bookFound = false;
 

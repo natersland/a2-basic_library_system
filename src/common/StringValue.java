@@ -16,8 +16,8 @@ public abstract class StringValue {
     public static final String WRONG_INPUT = "Wrong input";
     public static final String ENTER_YOUR_CHOICE = "Enter your choice: ";
     public static final String NOT_HAVE_BOOK = "Not have books in the library!";
-    public static final String PLEASE_ENTER_VALID_INTEGER = "Please enter a valid integer for quantity.";
+    public static final String PLEASE_ENTER_VALID_INTEGER = "Please enter a valid integer.";
     public static final String BOOK_LIST = "Book list:";
     public static final String SUCCESSFUL_RETURN = "Return successful";
-    public static final String INVALID_RETURN_QUANTITY = "Invalid return quantity";
+    public static final String EXIT_PROGRAM = "Exiting the program. Goodbye!";
 }
