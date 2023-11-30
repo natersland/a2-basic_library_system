@@ -123,7 +123,7 @@ public class Library {
         return quantity;
     }
 
-    public void addBook() {
+    private void addBook() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(StringValue.ENTER_BOOK_TITLE);
         String title = scanner.nextLine().toLowerCase();
@@ -178,11 +178,11 @@ public class Library {
         showMenu();
     }
 
-    public void borrowBook() {
+    private void borrowBook() {
         handleBookAction(StringValue.YOU_BORROWED, true);
     }
 
-    public void returnBook() {
+    private void returnBook() {
         handleBookAction(StringValue.SUCCESSFUL_RETURN, false);
     }
 
